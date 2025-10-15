@@ -89,19 +89,25 @@ The absurd tone maintains Simpsons humor while justifying combat mechanics throu
 
 ### Combat System
 
-**Phase 1 (To Be Defined):**
-- Movement: 8-directional in isometric space
-- Shooting mechanics (aimed ranged combat in isometric view)
-- Weapon variety (pistol, shotgun, rifle, grenades, melee)
-- Ammunition management system
-- Enemy engagement patterns
-- Depth sorting for proper sprite layering
+**Implementation Status:** See [combat-spec.md](combat-spec.md) for detailed prototype specifications.
 
-**Deferred Decisions:**
-- Exact combat controls (mouse-aimed, directional, twin-stick-style)
-- Weapon behavior details
+**High-Level Design:**
+- **Movement:** 8-directional smooth movement in world space, isometric rendering
+- **Combat:** Mouse-aimed projectile shooting, responsive controls
+- **Enemy AI:** Chase behavior with contact damage
+- **Feel:** Fast-paced action with hit feedback and game juice
+
+**Phase 1 Scope:**
+- Player movement (WASD, 150 px/sec)
+- Pistol weapon (mouse-aimed, projectile-based)
+- Radioactive Rat enemy (chase AI, contact damage)
+- Basic health system and victory/failure conditions
+
+**Future Additions:**
+- Weapon variety (shotgun, rifle, melee)
+- Enemy variety (ranged attackers, fast chasers)
 - Character-specific combat differences
-- Hit detection in isometric coordinates
+- Advanced hit detection and feedback systems
 
 ### Weapon & Loadout System
 
@@ -471,32 +477,53 @@ These decisions are intentionally postponed to later development phases:
 
 ---
 
-## Next Steps
+## Next Steps - Prototype-First Development
 
-### Immediate Actions
+### Phase 1: Combat Foundation (CURRENT FOCUS)
 
-1. **Define Combat Mechanics (Section A)**
-   - Movement and control scheme
-   - Weapon types and behavior
-   - Enemy interaction patterns
+**Philosophy:** Build playable prototype first, refine systems based on actual gameplay experience.
 
-2. **Design Springfield Zones (Section B)**
-   - Select initial zones for MVP
-   - Define visual and mechanical differences
-   - Plan progression through zones
+**Step 1: Minimal Combat Prototype**
+- Implement player movement (8-directional in isometric space)
+- Add 1 weapon (pistol - simplest case)
+- Create 1 enemy type (basic chaser AI)
+- Basic collision detection
+- Health system for player and enemies
 
-3. **Character Design (Section C)**
-   - Define Simpson family member stats/abilities
-   - Establish difficulty tiers
-   - Plan unlock sequence
+**Step 2: Feel Iteration**
+- Polish movement responsiveness
+- Add game juice (hit feedback, screen shake, particles)
+- Tune combat pacing until it feels good
+- Learn Rust + ggez patterns through implementation
 
-### Following Brainstorming Session
+**Step 3: Combat Variety**
+- Add 2-3 more weapons with distinct behavior
+- Add 2-3 enemy types with different patterns
+- Implement ammunition system basics
+- Simple UI (health, ammo counter)
 
-Once core design areas (A, B, C) are defined:
-- Create technical architecture document
-- Begin Phase 1 MVP implementation
-- Set up project repository structure
-- Implement first playable prototype
+**Step 4: Basic Rescue Flow**
+- Implement "walk to point A, walk back to point B" mission structure
+- No escort AI yet - just prove the loop works
+- Simple victory/failure states
+- Cash reward system (basic economy)
+
+**Step 5: Playtest & Evaluate**
+- Does core combat feel fun?
+- Is resource management interesting?
+- What needs more depth?
+
+### Phase 2: Return to Design Questions (DEFERRED)
+
+After prototype proves core loop is fun, revisit:
+- Failure states and death penalties (informed by actual deaths)
+- Character unlock economy clarity (informed by progression pacing)
+- Safe zone functionality (informed by mission flow experience)
+- Character differentiation mechanics (informed by what feels samey)
+- Shop placement and economy balancing (informed by resource tension)
+- Zone progression and variety (informed by replayability needs)
+
+**Rationale:** Real gameplay experience answers theoretical design questions faster and more accurately than paper design.
 
 ---
 
