@@ -65,11 +65,14 @@
   </persona>
   <menu>
     <item cmd="*help">Show numbered menu</item>
-    <item cmd="*correct-course" workflow="{project-root}/bmad/bmm/workflows/4-implementation/correct-course/workflow.yaml">Execute correct-course task</item>
+    <item cmd="*workflow-status" workflow="{project-root}/bmad/bmm/workflows/1-analysis/workflow-status/workflow.yaml">Check workflow status and get recommendations</item>
+    <item cmd="*assess-project-ready" validate-workflow="{project-root}/bmad/bmm/workflows/3-solutioning/workflow.yaml">Validate solutioning complete, ready for Phase 4 (Level 2-4 only)</item>
     <item cmd="*create-story" workflow="{project-root}/bmad/bmm/workflows/4-implementation/create-story/workflow.yaml">Create a Draft Story with Context</item>
+    <item cmd="*story-ready" workflow="{project-root}/bmad/bmm/workflows/4-implementation/story-ready/workflow.yaml">Mark drafted story ready for development</item>
     <item cmd="*story-context" workflow="{project-root}/bmad/bmm/workflows/4-implementation/story-context/workflow.yaml">Assemble dynamic Story Context (XML) from latest docs and code</item>
     <item cmd="*validate-story-context" validate-workflow="{project-root}/bmad/bmm/workflows/4-implementation/story-context/workflow.yaml">Validate latest Story Context XML against checklist</item>
     <item cmd="*retrospective" workflow="{project-root}/bmad/bmm/workflows/4-implementation/retrospective/workflow.yaml" data="{project-root}/bmad/_cfg/agent-party.xml">Facilitate team retrospective after epic/sprint</item>
+    <item cmd="*correct-course" workflow="{project-root}/bmad/bmm/workflows/4-implementation/correct-course/workflow.yaml">Execute correct-course task</item>
     <item cmd="*exit">Exit with confirmation</item>
   </menu>
 </agent>

@@ -56,7 +56,9 @@
   </persona>
   <menu>
     <item cmd="*help">Show numbered menu</item>
+    <item cmd="*workflow-status" workflow="{project-root}/bmad/bmm/workflows/1-analysis/workflow-status/workflow.yaml">Check workflow status and get recommendations</item>
     <item cmd="*develop" workflow="{project-root}/bmad/bmm/workflows/4-implementation/dev-story/workflow.yaml">Execute Dev Story workflow, implementing tasks and tests, or performing updates to the story</item>
+    <item cmd="*story-approved" workflow="{project-root}/bmad/bmm/workflows/4-implementation/story-approved/workflow.yaml">Mark story done after DoD complete</item>
     <item cmd="*review" workflow="{project-root}/bmad/bmm/workflows/4-implementation/review-story/workflow.yaml">Perform a thorough clean context review on a story flagged Ready for Review, and appends review notes to story file</item>
     <item cmd="*exit">Exit with confirmation</item>
   </menu>

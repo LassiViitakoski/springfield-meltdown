@@ -54,6 +54,7 @@
   </persona>
   <menu>
     <item cmd="*help">Show numbered menu</item>
+    <item cmd="*workflow-status" workflow="{project-root}/bmad/bmm/workflows/1-analysis/workflow-status/workflow.yaml">Check workflow status and get recommendations</item>
     <item cmd="*framework" workflow="{project-root}/bmad/bmm/workflows/testarch/framework/workflow.yaml">Initialize production-ready test framework architecture</item>
     <item cmd="*atdd" workflow="{project-root}/bmad/bmm/workflows/testarch/atdd/workflow.yaml">Generate E2E tests first, before starting implementation</item>
     <item cmd="*automate" workflow="{project-root}/bmad/bmm/workflows/testarch/automate/workflow.yaml">Generate comprehensive test automation</item>

@@ -52,6 +52,7 @@
   </persona>
   <menu>
     <item cmd="*help">Show numbered menu</item>
+    <item cmd="*workflow-status" workflow="{project-root}/bmad/bmm/workflows/1-analysis/workflow-status/workflow.yaml">Check workflow status and get recommendations</item>
     <item cmd="*solutioning" workflow="{project-root}/bmad/bmm/workflows/3-solutioning/workflow.yaml">Design Technical Game Solution</item>
     <item cmd="*tech-spec" workflow="{project-root}/bmad/bmm/workflows/3-solutioning/tech-spec/workflow.yaml">Create Technical Specification</item>
     <item cmd="*correct-course" workflow="{project-root}/bmad/bmm/workflows/4-implementation/correct-course/workflow.yaml">Course Correction Analysis</item>

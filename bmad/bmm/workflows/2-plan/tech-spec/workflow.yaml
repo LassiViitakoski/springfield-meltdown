@@ -15,8 +15,18 @@ installed_path: "{project-root}/bmad/bmm/workflows/2-plan/tech-spec"
 instructions: "{installed_path}/instructions-sm.md"
 template: "{installed_path}/tech-spec-template.md"
 
+# Story generation instructions (invoked based on level)
+instructions_level0_story: "{installed_path}/instructions-level0-story.md"
+instructions_level1_stories: "{installed_path}/instructions-level1-stories.md"
+
+# Templates
+user_story_template: "{installed_path}/user-story-template.md"
+epic_stories_template: "{installed_path}/epic-stories-template.md"
+
 # Output configuration
 default_output_file: "{output_folder}/tech-spec.md"
+user_story_file: "{output_folder}/user-story.md"
+epic_stories_file: "{output_folder}/epic-stories.md"
 
 # Recommended input documents (optional for Level 0)
 recommended_inputs:

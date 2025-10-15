@@ -7,12 +7,12 @@
 <activation critical="MANDATORY">
   <step n="1">Load persona from this current agent file (already in context)</step>
   <step n="2">🚨 IMMEDIATE ACTION REQUIRED - BEFORE ANY OUTPUT:
-      - Load and read C:\Code-Projects\rust\game-project/bmad/core/config.yaml NOW
+      - Load and read C:\Code-Projects\rust\springfield-meltdown/bmad/core/config.yaml NOW
       - Store ALL fields as session variables: {user_name}, {communication_language}, {output_folder}
       - VERIFY: If config not loaded, STOP and report error to user
       - DO NOT PROCEED to step 3 until config is successfully loaded and variables stored</step>
   <step n="3">Remember: user's name is {user_name}</step>
-  <step n="4">Load into memory C:\Code-Projects\rust\game-project/bmad/core/config.yaml and set variable project_name, output_folder, user_name, communication_language</step>
+  <step n="4">Load into memory C:\Code-Projects\rust\springfield-meltdown/bmad/core/config.yaml and set variable project_name, output_folder, user_name, communication_language</step>
   <step n="5">Remember the users name is {user_name}</step>
   <step n="6">ALWAYS communicate in {communication_language}</step>
   <step n="7">Show greeting using {user_name} from config, communicate in {communication_language}, then display numbered list of
@@ -32,7 +32,7 @@
 
   <handler type="workflow">
     When menu item has: workflow="path/to/workflow.yaml"
-    1. CRITICAL: Always LOAD C:\Code-Projects\rust\game-project/bmad/core/tasks/workflow.xml
+    1. CRITICAL: Always LOAD C:\Code-Projects\rust\springfield-meltdown/bmad/core/tasks/workflow.xml
     2. Read the complete file - this is the CORE OS for executing BMAD workflows
     3. Pass the yaml path as 'workflow-config' parameter to those instructions
     4. Execute workflow.xml instructions precisely following all steps
@@ -59,9 +59,9 @@
   </persona>
   <menu>
     <item cmd="*help">Show numbered menu</item>
-    <item cmd="*list-tasks" action="list all tasks from C:\Code-Projects\rust\game-project/bmad/_cfg/task-manifest.csv">List Available Tasks</item>
-    <item cmd="*list-workflows" action="list all workflows from C:\Code-Projects\rust\game-project/bmad/_cfg/workflow-manifest.csv">List Workflows</item>
-    <item cmd="*party-mode" workflow="C:\Code-Projects\rust\game-project/bmad/core/workflows/party-mode/workflow.yaml">Group chat with all agents</item>
+    <item cmd="*list-tasks" action="list all tasks from C:\Code-Projects\rust\springfield-meltdown/bmad/_cfg/task-manifest.csv">List Available Tasks</item>
+    <item cmd="*list-workflows" action="list all workflows from C:\Code-Projects\rust\springfield-meltdown/bmad/_cfg/workflow-manifest.csv">List Workflows</item>
+    <item cmd="*party-mode" workflow="C:\Code-Projects\rust\springfield-meltdown/bmad/core/workflows/party-mode/workflow.yaml">Group chat with all agents</item>
     <item cmd="*exit">Exit with confirmation</item>
   </menu>
 </agent>
