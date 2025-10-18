@@ -1,3 +1,4 @@
 BMAD-METHOD/
 
 target/
+Cargo.lock
