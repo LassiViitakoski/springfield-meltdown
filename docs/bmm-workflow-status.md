@@ -8,9 +8,9 @@
 
 ## Current Status
 
-**Current Phase:** 4-Implementation (Story SPRING-001-1.1 Implementation Complete)
-**Current Workflow:** story-context (Story SPRING-001-1.2) - Complete
-**Overall Progress:** 56%
+**Current Phase:** 4-Implementation (Story SPRING-001-1.2 Approved)
+**Current Workflow:** story-approved (Story SPRING-001-1.2) - Complete
+**Overall Progress:** 64%
 
 **Project Level:** 2 (Medium project - multiple features/epics)
 **Project Type:** Game
@@ -53,28 +53,28 @@ This section documents your complete planned workflow from start to finish.
 **Epic:** SPRING-001 - Combat Prototype Foundation (21 story points)
 
 **Story Queue:**
-- **BACKLOG:** 9 stories (17 points remaining)
-  - Sprint 1: Stories 1.3-1.4 (4 points) - Movement & Debug UI
+- **BACKLOG:** 8 stories (15 points remaining)
+  - Sprint 1: Story 1.4 (2 points) - Debug UI
   - Sprint 2: Stories 2.1-2.4 (8 points) - Combat Mechanics
   - Sprint 3: Stories 3.1-3.3 (5 points) - Health & Victory
-- **TODO:** SPRING-001-1.3 (8-Directional Player Movement)
-- **IN PROGRESS:** SPRING-001-1.2 (Player Entity & Sprite Rendering) - Status: Ready
-- **DONE:** 1 story (2 points) - SPRING-001-1.1
+- **TODO:** SPRING-001-1.4 (Camera & Debug UI)
+- **IN PROGRESS:** SPRING-001-1.3 (8-Directional Player Movement) - Status: Draft
+- **DONE:** 2 stories (4 points) - SPRING-001-1.1, SPRING-001-1.2
 
 ---
 
 ## What to Do Next
 
-**Next Action:** Implement Story SPRING-001-1.2
+**Next Action:** Generate story context for SPRING-001-1.3
 
-**Command to run:** `*dev-story` (with DEV agent)
+**Command to run:** `*story-context` (with SM agent)
 
-**Agent to load:** `/bmad:bmm:agents:game-dev`
+**Agent to load:** `/bmad:bmm:agents:sm`
 
 **Why this next?**
-- Story SPRING-001-1.2 context generated successfully
-- Context file available: docs/stories/story-context-SPRING-001.SPRING-001-1.2.xml
-- Implementation: Player Entity & Sprite Rendering (2 points, 2-3 hours)
+- Story SPRING-001-1.3 moved to IN PROGRESS after completing 1.2
+- Context needed before development can begin
+- Implementation: 8-Directional Player Movement (2 points, 2-3 hours)
 - Tech spec available: tech-spec-epic-SPRING-001.md
 
 ---
@@ -95,6 +95,9 @@ This section documents your complete planned workflow from start to finish.
 - **2025-10-18:** Completed review-story for Story SPRING-001-1.1 (Project Setup & Window Rendering). Review outcome: Approve. No action items. Story status changed to Review Passed. Next: Run story-approved to mark complete and advance story queue.
 - **2025-10-18:** Story SPRING-001-1.1 (Project Setup & Window Rendering) approved and marked complete. Moved from IN PROGRESS → DONE (2 points earned). Story SPRING-001-1.2 (Player Entity & Sprite Rendering) moved from TODO → IN PROGRESS. Story SPRING-001-1.3 moved from BACKLOG → TODO. Next: Generate story-context for SPRING-001-1.2.
 - **2025-10-18:** Completed story-context for Story SPRING-001-1.2 (Player Entity & Sprite Rendering). Context file: docs/stories/story-context-SPRING-001.SPRING-001-1.2.xml. Next: DEV agent should run dev-story to implement.
+- **2025-10-18:** Completed dev-story for Story SPRING-001-1.2 (Player Entity & Sprite Rendering). All tasks complete, tests passing. Story status: Ready for Review. Next: User reviews and runs story-approved when satisfied with implementation.
+- **2025-10-18:** Completed review-story for Story SPRING-001-1.2 (Player Entity & Sprite Rendering). Review outcome: Approve. No action items. Story status changed to Review Passed. Next: Run story-approved to mark complete and advance story queue.
+- **2025-10-18:** Story SPRING-001-1.2 (Player Entity & Sprite Rendering) approved and marked complete. Moved from IN PROGRESS → DONE (2 points earned). Story SPRING-001-1.3 (8-Directional Player Movement) moved from TODO → IN PROGRESS. Story SPRING-001-1.4 (Camera & Debug UI) moved from BACKLOG → TODO. Next: Generate story-context for SPRING-001-1.3.
 
 ---
 
