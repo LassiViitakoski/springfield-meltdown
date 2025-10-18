@@ -64,4 +64,11 @@ SO THAT I know where I am in the game world
 
 ---
 
+## Dev Agent Record
+
+### Context Reference
+- [story-context-SPRING-001.SPRING-001-1.2.xml](story-context-SPRING-001.SPRING-001-1.2.xml) - Generated 2025-10-18
+
+---
+
 _Story created: 2025-10-15_

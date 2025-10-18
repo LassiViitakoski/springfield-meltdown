@@ -1,0 +1,116 @@
+<story-context id="bmad/bmm/workflows/4-implementation/story-context/template" v="1.0">
+  <metadata>
+    <epicId>SPRING-001</epicId>
+    <storyId>SPRING-001-1.1</storyId>
+    <title>Project Setup & Window Rendering</title>
+    <status>Ready</status>
+    <generatedAt>2025-10-18</generatedAt>
+    <generator>BMAD Story Context Workflow</generator>
+    <sourceStoryPath>docs/stories/SPRING-001-1.1-project-setup.md</sourceStoryPath>
+  </metadata>
+
+  <story>
+    <asA>a developer</asA>
+    <iWant>a working ggez project with window rendering</iWant>
+    <soThat>I have a foundation to build the game on</soThat>
+    <tasks>
+      - Create Cargo project
+      - Add ggez dependency
+      - Implement GameState struct
+      - Implement EventHandler trait (update/draw methods)
+      - Configure window settings (800x600, title)
+      - Verify 60 FPS game loop
+      - Initialize git repository
+      - Add .gitignore (target/, Cargo.lock)
+      - Commit initial setup
+    </tasks>
+  </story>
+
+  <acceptanceCriteria>
+    <criterion id="AC-1">Cargo project created with ggez dependency</criterion>
+    <criterion id="AC-2">800x600 window opens with black background</criterion>
+    <criterion id="AC-3">Window has title "Springfield Meltdown - Prototype"</criterion>
+    <criterion id="AC-4">Game loop runs at 60 FPS</criterion>
+    <criterion id="AC-5">Basic EventHandler trait implemented (update/draw)</criterion>
+  </acceptanceCriteria>
+
+  <artifacts>
+    <docs>
+      <doc>
+        <path>docs/tech-spec-epic-SPRING-001.md</path>
+        <title>Technical Specification: Combat Prototype Foundation</title>
+        <section>Dependencies and Integrations</section>
+        <snippet>Cargo.toml: ggez = "0.9" dependency. Rust 1.70+ required. Code-first approach, no external services.</snippet>
+      </doc>
+      <doc>
+        <path>docs/tech-spec-epic-SPRING-001.md</path>
+        <title>Technical Specification: Combat Prototype Foundation</title>
+        <section>Module Structure</section>
+        <snippet>main.rs entry point, ggez context setup, event loop initialization. GameState implements EventHandler trait.</snippet>
+      </doc>
+      <doc>
+        <path>docs/tech-spec-epic-SPRING-001.md</path>
+        <title>Technical Specification: Combat Prototype Foundation</title>
+        <section>Acceptance Criteria AC-1.1</section>
+        <snippet>Cargo project compiles with ggez 0.9, 800x600 window, black background, title "Springfield Meltdown - Prototype", 60 FPS game loop, EventHandler implemented.</snippet>
+      </doc>
+      <doc>
+        <path>docs/combat-spec.md</path>
+        <title>Combat System Specification</title>
+        <section>Coordinate System</section>
+        <snippet>World space uses 2D coordinates (x,y). Isometric projection for rendering. All game logic in world space.</snippet>
+      </doc>
+      <doc>
+        <path>docs/game-design-document.md</path>
+        <title>Game Design Document</title>
+        <section>Visual Style</section>
+        <snippet>2.5D isometric perspective with sprite-based graphics. Fixed isometric angle. 2D engine with coordinate transforms for depth illusion.</snippet>
+      </doc>
+    </docs>
+    <code>
+      <!-- No existing code - greenfield project setup -->
+    </code>
+    <dependencies>
+      <rust>
+        <package name="ggez" version="0.9" purpose="Game framework for rendering, input, windowing" />
+      </rust>
+    </dependencies>
+  </artifacts>
+
+  <constraints>
+    - Use ggez 0.9.x (check latest stable version)
+    - Set up git repository with .gitignore
+    - Create basic main.rs with GameState struct
+    - Cargo.toml dependencies: ggez = "0.9"
+    - Rust ownership model requires careful entity lifetime management
+    - No heap allocations in hot path (future consideration)
+    - 60 FPS target on modest hardware
+    - Simple data structures prioritized over premature optimization
+  </constraints>
+
+  <interfaces>
+    <interface>
+      <name>EventHandler</name>
+      <kind>Trait implementation</kind>
+      <signature>impl EventHandler for GameState { fn update(&amp;mut self, ctx: &amp;mut Context) -&gt; GameResult; fn draw(&amp;mut self, ctx: &amp;mut Context) -&gt; GameResult; }</signature>
+      <path>To be created in src/main.rs or src/game_state.rs</path>
+    </interface>
+    <interface>
+      <name>GameState</name>
+      <kind>Struct</kind>
+      <signature>pub struct GameState { /* fields TBD */ }</signature>
+      <path>To be created in src/main.rs or src/game_state.rs</path>
+    </interface>
+  </interfaces>
+  <tests>
+    <standards>Manual playtesting only for Phase 1. No automated tests required. Validate acceptance criteria through gameplay. Measure FPS via on-screen display. Check compile output for warnings.</standards>
+    <locations>N/A - No automated tests in prototype phase. Future: tests/ directory for unit tests.</locations>
+    <ideas>
+      <test-idea ac-ref="AC-1">Verify cargo build completes successfully without errors</test-idea>
+      <test-idea ac-ref="AC-2">Launch game, visually confirm 800x600 window with black background</test-idea>
+      <test-idea ac-ref="AC-3">Check window title bar displays "Springfield Meltdown - Prototype"</test-idea>
+      <test-idea ac-ref="AC-4">Add FPS counter to verify stable 60 FPS during idle game loop</test-idea>
+      <test-idea ac-ref="AC-5">Confirm update() and draw() methods are called each frame without panics</test-idea>
+    </ideas>
+  </tests>
+</story-context>
