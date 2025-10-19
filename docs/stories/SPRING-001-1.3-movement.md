@@ -61,7 +61,7 @@ SO THAT I can navigate the game world
 
 - [x] Code compiles without warnings (minor unused code warnings for future features)
 - [x] Manual playtesting confirms acceptance criteria
-- [ ] Code committed to git with descriptive message (after review)
+- [x] Code committed to git with descriptive message (commit 46d347b)
 - [x] No known bugs blocking gameplay
 
 ---
@@ -106,6 +106,7 @@ Implementation complete and tested. Ready for review.
 - 2025-10-19: Implemented 8-directional WASD movement with normalized diagonals, screen bounds collision, and 300 px/sec speed
 - 2025-10-19: Senior Developer Review notes appended
 - 2025-10-19: Story marked complete and approved by SM agent
+- 2025-10-19: Committed to git (46d347b)
 
 ---
 
