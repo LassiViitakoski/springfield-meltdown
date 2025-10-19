@@ -35,6 +35,20 @@ The combat prototype serves as the technical foundation for all future game syst
 - Visual polish, particles, screen shake (SPRING-002)
 - Sound and music integration
 
+## Development Process
+
+**IMPORTANT:** All story implementations for this epic must follow the standard development workflow defined in [development-workflow.md](development-workflow.md).
+
+**Key Requirements:**
+- Manual validation required before marking acceptance criteria complete
+- User must test changes via `cargo run` and provide feedback
+- Iteration on issues before marking story ready for review
+- Git commits only after *review-story workflow completes
+
+Refer to development-workflow.md for complete protocol and git commit guidelines.
+
+---
+
 ## System Architecture Alignment
 
 **Framework Architecture:**
