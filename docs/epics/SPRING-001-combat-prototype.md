@@ -79,7 +79,7 @@ Build minimal viable combat system to validate Springfield Meltdown's core gamep
 - **Goal:** Shooting works, enemies chase player
 - **Deliverable:** Can shoot enemies, enemies die when shot
 - **Risk:** Coordinate transforms might be tricky
-- **Mitigation:** Use provided helper functions from combat-spec.md
+- **Mitigation:** Use provided helper functions from specs/combat-spec.md
 
 ### Sprint 3: Complete Loop (Week 9-12)
 - **Story Points:** 5
@@ -92,7 +92,7 @@ Build minimal viable combat system to validate Springfield Meltdown's core gamep
 ### Optional Sprint 4: Feel Iteration (If Needed)
 - **Goal:** Polish and tuning (game juice)
 - **Activities:** Screen shake, hit feedback, speed tuning
-- **Reference:** See combat-spec.md "Combat Feel (Polish - Step 2)"
+- **Reference:** See specs/combat-spec.md "Combat Feel (Polish - Step 2)"
 
 **Total Epic:** 21 story points over 3-4 sprints
 **Expected Timeline:** 6-12 weeks at 5-10 hours/week
@@ -166,7 +166,7 @@ Build minimal viable combat system to validate Springfield Meltdown's core gamep
 
 ## References
 
-- **Combat Specification:** [combat-spec.md](../combat-spec.md)
+- **Combat Specification:** [combat-spec.md](../specs/combat-spec.md)
 - **Game Design Document:** [game-design-document.md](../game-design-document.md)
 - **Technology Stack:** Rust + ggez (code-first game framework)
 

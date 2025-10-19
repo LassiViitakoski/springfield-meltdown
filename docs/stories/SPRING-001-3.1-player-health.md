@@ -40,7 +40,7 @@ SO THAT combat has risk
 
 ## References
 
-- [Combat Specification - Player Health](../combat-spec.md)
+- [Combat Specification - Player Health](../specs/combat-spec.md)
 
 ---
 

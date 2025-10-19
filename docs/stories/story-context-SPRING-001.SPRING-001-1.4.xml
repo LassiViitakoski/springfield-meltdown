@@ -1,0 +1,153 @@
+<story-context id="bmad/bmm/workflows/4-implementation/story-context/template" v="1.0">
+  <metadata>
+    <epicId>SPRING-001</epicId>
+    <storyId>SPRING-001-1.4</storyId>
+    <title>Camera & Debug UI</title>
+    <status>draft</status>
+    <generatedAt>2025-10-19</generatedAt>
+    <generator>BMAD Story Context Workflow</generator>
+    <sourceStoryPath>docs/stories/SPRING-001-1.4-camera-debug.md</sourceStoryPath>
+  </metadata>
+
+  <story>
+    <asA>developer</asA>
+    <iWant>to see player position and FPS on screen</iWant>
+    <soThat>I can debug movement and performance</soThat>
+    <tasks>
+- Implement camera following logic
+- Create debug text rendering function
+- Display player position in UI
+- Display FPS counter
+- Position text in top-left corner
+- Verify text updates each frame
+    </tasks>
+  </story>
+
+  <acceptanceCriteria>
+- Camera centered on player (simple fixed follow)
+- Debug text displays player position (x, y)
+- Debug text displays current FPS
+- Text renders in top-left corner (white font)
+- Text updates every frame
+  </acceptanceCriteria>
+
+  <artifacts>
+    <docs>
+      <doc>
+        <path>docs/tech-specs/tech-spec-epic-SPRING-001.md</path>
+        <title>Technical Specification: Combat Prototype Foundation</title>
+        <section>Debug UI Rendering (rendering/debug_ui.rs)</section>
+        <snippet>Module for debug text rendering (FPS, position). Uses ggez::graphics::Text for rendering debug information to screen.</snippet>
+      </doc>
+      <doc>
+        <path>docs/specs/combat-spec.md</path>
+        <title>Combat System Specification</title>
+        <section>Camera System</section>
+        <snippet>Fixed camera centered on player (MVP). No smooth follow initially. Future: smooth camera lerp enhancement.</snippet>
+      </doc>
+      <doc>
+        <path>docs/development-workflow.md</path>
+        <title>Development Workflow</title>
+        <section>Manual Validation Flow</section>
+        <snippet>Dev agent must ask user to test via cargo run before marking ACs complete. Wait for user feedback, iterate if needed.</snippet>
+      </doc>
+    </docs>
+    <code>
+      <artifact>
+        <path>src/main.rs</path>
+        <kind>module</kind>
+        <symbol>GameState</symbol>
+        <lines>48-59</lines>
+        <reason>Main game state struct. Need to add camera_offset field and FPS tracking fields for debug UI.</reason>
+      </artifact>
+      <artifact>
+        <path>src/main.rs</path>
+        <kind>struct</kind>
+        <symbol>Player</symbol>
+        <lines>14-36</lines>
+        <reason>Player entity with pos field. Camera should center on player.pos using screen center - player_screen_pos calculation.</reason>
+      </artifact>
+      <artifact>
+        <path>src/main.rs</path>
+        <kind>function</kind>
+        <symbol>world_to_screen</symbol>
+        <lines>39-46</lines>
+        <reason>Coordinate transformation utility. Shows how camera_offset is applied during isometric projection (though current story uses screen-space movement).</reason>
+      </artifact>
+      <artifact>
+        <path>src/main.rs</path>
+        <kind>function</kind>
+        <symbol>GameState::draw</symbol>
+        <lines>114-152</lines>
+        <reason>Rendering function. Need to add debug text rendering here using ggez::graphics::Text. Text should render after existing draws, in top-left corner.</reason>
+      </artifact>
+      <artifact>
+        <path>src/main.rs</path>
+        <kind>function</kind>
+        <symbol>GameState::update</symbol>
+        <lines>62-112</lines>
+        <reason>Update loop. Need to track frame delta times for FPS calculation. Current implementation already uses ctx.time.delta() for movement.</reason>
+      </artifact>
+    </code>
+    <dependencies>
+      <rust>
+        <crate name="ggez" version="0.9.x">
+          <module>ggez::graphics::Text</module>
+          <module>ggez::graphics::TextFragment</module>
+          <module>ggez::graphics::DrawParam</module>
+          <module>ggez::Context::time</module>
+        </crate>
+      </rust>
+    </dependencies>
+  </artifacts>
+
+  <constraints>
+- Use ggez::graphics::Text for debug text rendering (framework requirement)
+- Camera follows player via simple fixed offset: camera_offset = screen_center - player_screen_pos (no smooth lerp in MVP)
+- Debug text format: "Pos: (123.4, 567.8) | FPS: 60" (as specified in Technical Notes)
+- Text position: top-left corner with small padding (e.g., 10px from edges)
+- Text color: white for readability on dark background
+- FPS calculation: track recent frame deltas, compute average or instantaneous FPS
+- Update debug text every frame (no throttling needed for prototype)
+- Player position in screen space (current implementation uses screen-space movement, pos is offset from center)
+- All rendering happens in draw() function following existing pattern
+- Manual validation required before marking ACs complete (development-workflow.md)
+  </constraints>
+  <interfaces>
+    <interface>
+      <name>ggez::graphics::Text</name>
+      <kind>ggez API</kind>
+      <signature>Text::new(fragment: impl Into&lt;TextFragment&gt;) -&gt; Text; canvas.draw(&amp;text, DrawParam::default().dest(position))</signature>
+      <path>External: ggez crate documentation</path>
+    </interface>
+    <interface>
+      <name>GameState.draw()</name>
+      <kind>function</kind>
+      <signature>fn draw(&amp;mut self, ctx: &amp;mut Context) -&gt; GameResult</signature>
+      <path>src/main.rs:114-152</path>
+    </interface>
+    <interface>
+      <name>Player.pos</name>
+      <kind>struct field</kind>
+      <signature>pos: Vector2&lt;f32&gt; // Screen-space offset from center (400, 300)</signature>
+      <path>src/main.rs:15</path>
+    </interface>
+    <interface>
+      <name>Context.time.fps()</name>
+      <kind>ggez API</kind>
+      <signature>ctx.time.fps() -&gt; f64 // Returns current FPS estimate</signature>
+      <path>External: ggez crate documentation</path>
+    </interface>
+  </interfaces>
+  <tests>
+    <standards>Manual validation via cargo run required per development-workflow.md. Build with cargo build to verify compilation. No automated unit tests for rendering/UI in prototype phase - visual confirmation sufficient. Definition of Done requires: compiles without warnings, manual playtesting confirms ACs, git commit after review.</standards>
+    <locations>src/main.rs (inline tests if added), manual validation via cargo run executable</locations>
+    <ideas>
+      <test ac="Camera centered on player">Manual: Move player with WASD, verify player circle stays centered on screen visually.</test>
+      <test ac="Debug text displays player position">Manual: Move player, verify top-left debug text shows changing (x, y) coordinates that match movement direction.</test>
+      <test ac="Debug text displays FPS">Manual: Check top-left text shows FPS value near 60 (or current frame rate).</test>
+      <test ac="Text renders in top-left corner (white)">Manual: Visual inspection that text appears in top-left with white color, readable against black background.</test>
+      <test ac="Text updates every frame">Manual: Observe position values change smoothly during movement, FPS updates continuously.</test>
+    </ideas>
+  </tests>
+</story-context>

@@ -40,7 +40,7 @@ SO THAT I can eliminate threats
 
 ## References
 
-- [Combat Specification - Collision Detection](../combat-spec.md)
+- [Combat Specification - Collision Detection](../specs/combat-spec.md)
 
 ---
 

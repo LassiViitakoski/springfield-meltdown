@@ -37,25 +37,25 @@
   <artifacts>
     <docs>
       <doc>
-        <path>docs/tech-spec-epic-SPRING-001.md</path>
+        <path>docs/tech-specs/tech-spec-epic-SPRING-001.md</path>
         <title>Technical Specification: Combat Prototype Foundation</title>
         <section>Dependencies and Integrations</section>
         <snippet>Cargo.toml: ggez = "0.9" dependency. Rust 1.70+ required. Code-first approach, no external services.</snippet>
       </doc>
       <doc>
-        <path>docs/tech-spec-epic-SPRING-001.md</path>
+        <path>docs/tech-specs/tech-spec-epic-SPRING-001.md</path>
         <title>Technical Specification: Combat Prototype Foundation</title>
         <section>Module Structure</section>
         <snippet>main.rs entry point, ggez context setup, event loop initialization. GameState implements EventHandler trait.</snippet>
       </doc>
       <doc>
-        <path>docs/tech-spec-epic-SPRING-001.md</path>
+        <path>docs/tech-specs/tech-spec-epic-SPRING-001.md</path>
         <title>Technical Specification: Combat Prototype Foundation</title>
         <section>Acceptance Criteria AC-1.1</section>
         <snippet>Cargo project compiles with ggez 0.9, 800x600 window, black background, title "Springfield Meltdown - Prototype", 60 FPS game loop, EventHandler implemented.</snippet>
       </doc>
       <doc>
-        <path>docs/combat-spec.md</path>
+        <path>docs/specs/combat-spec.md</path>
         <title>Combat System Specification</title>
         <section>Coordinate System</section>
         <snippet>World space uses 2D coordinates (x,y). Isometric projection for rendering. All game logic in world space.</snippet>

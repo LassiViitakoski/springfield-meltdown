@@ -34,31 +34,31 @@
   <artifacts>
     <docs>
       <doc>
-        <path>docs/tech-spec-epic-SPRING-001.md</path>
+        <path>docs/tech-specs/tech-spec-epic-SPRING-001.md</path>
         <title>Technical Specification: Combat Prototype Foundation</title>
         <section>Data Models and Contracts - Player struct</section>
         <snippet>Player struct with pos: Vec2 (world coordinates), velocity, speed (150.0 px/sec), hp (100), radius (16.0 px collision), last_shot_time cooldown tracking.</snippet>
       </doc>
       <doc>
-        <path>docs/tech-spec-epic-SPRING-001.md</path>
+        <path>docs/tech-specs/tech-spec-epic-SPRING-001.md</path>
         <title>Technical Specification: Combat Prototype Foundation</title>
         <section>Coordinate Systems</section>
         <snippet>World coords (2D Cartesian) vs Screen coords (isometric projection). Transform: screen = world_to_screen(world, camera_offset). Isometric projection rotates 45° and scales Y by 0.5.</snippet>
       </doc>
       <doc>
-        <path>docs/tech-spec-epic-SPRING-001.md</path>
+        <path>docs/tech-specs/tech-spec-epic-SPRING-001.md</path>
         <title>Technical Specification: Combat Prototype Foundation</title>
         <section>Acceptance Criteria AC-1.2</section>
         <snippet>Player struct with Vec2 position. Renders as yellow circle (#FFD700, 16px radius). Spawns at screen center (400, 300). world_to_screen() transforms coords to isometric. Player sprite visible and positioned correctly.</snippet>
       </doc>
       <doc>
-        <path>docs/combat-spec.md</path>
+        <path>docs/specs/combat-spec.md</path>
         <title>Combat System Specification</title>
         <section>Coordinate System</section>
         <snippet>World space: 2D float (x,y), top-down view, all logic in world space. Screen space: isometric projection. Formula: screen_x = (world_x - world_y) * TILE_WIDTH_HALF, screen_y = (world_x + world_y) * TILE_HEIGHT_HALF. Constants: TILE_WIDTH_HALF=32, TILE_HEIGHT_HALF=16.</snippet>
       </doc>
       <doc>
-        <path>docs/combat-spec.md</path>
+        <path>docs/specs/combat-spec.md</path>
         <title>Combat System Specification</title>
         <section>Player Movement - Parameters</section>
         <snippet>Base Speed: 150 pixels/second, Collision Radius: 16 pixels (circle collider), Bounds Checking: prevent leaving play area.</snippet>

@@ -40,7 +40,7 @@ SO THAT I can navigate the game world
 
 ## References
 
-- [Combat Specification - Player Movement](../combat-spec.md)
+- [Combat Specification - Player Movement](../specs/combat-spec.md)
 
 ---
 
@@ -248,7 +248,7 @@ Story SPRING-001-1.3 (8-Directional Player Movement) successfully implements all
    - **Severity:** Low
    - **Type:** Documentation
    - **Related AC:** AC-2
-   - **File:** docs/tech-spec-epic-SPRING-001.md:434
+   - **File:** docs/tech-specs/tech-spec-epic-SPRING-001.md:434
    - **Suggested Owner:** Developer
    - **Reason:** Maintain spec/implementation consistency for future reference
 

@@ -115,9 +115,29 @@ impl EventHandler for GameState {
         // Clear screen with black background
         let mut canvas = graphics::Canvas::from_frame(ctx, Color::BLACK);
 
-        // Draw debug bounds box (600x400 centered at screen)
-        // Screen is 800x600, so box starts at (100, 100)
-        let bounds_rect = graphics::Rect::new(100.0, 100.0, 600.0, 400.0);
+        // Camera offset: keeps player centered on screen
+        // World position (0,0) appears at screen center
+        let screen_center = Vector2 { x: 400.0, y: 300.0 };
+        let camera_offset = Vector2 {
+            x: screen_center.x - self.player.pos.x,
+            y: screen_center.y - self.player.pos.y,
+        };
+
+        // Draw debug bounds box in world space (moves with camera)
+        // World bounds: 600x400 centered at world origin (0, 0)
+        // Box corners: (-300, -200) to (300, 200) in world space
+        let world_bounds_x = -300.0;
+        let world_bounds_y = -200.0;
+        let world_bounds_width = 600.0;
+        let world_bounds_height = 400.0;
+
+        // Transform world bounds to screen space using camera offset
+        let bounds_rect = graphics::Rect::new(
+            world_bounds_x + camera_offset.x,
+            world_bounds_y + camera_offset.y,
+            world_bounds_width,
+            world_bounds_height,
+        );
         let bounds_mesh = Mesh::new_rectangle(
             ctx,
             graphics::DrawMode::stroke(2.0),
@@ -126,12 +146,8 @@ impl EventHandler for GameState {
         )?;
         canvas.draw(&bounds_mesh, DrawParam::default());
 
-        // Player position is already in screen space (no isometric transform needed)
-        // Player starts at center of screen
-        let screen_pos = Vector2 {
-            x: 400.0 + self.player.pos.x,
-            y: 300.0 + self.player.pos.y,
-        };
+        // Camera follows player: always render player at screen center
+        let screen_pos = screen_center;
 
         // Create yellow circle mesh for player sprite
         let player_color = Color::from_rgb(255, 215, 0); // #FFD700 yellow
@@ -146,6 +162,20 @@ impl EventHandler for GameState {
 
         // Draw player at screen position
         canvas.draw(&circle, DrawParam::default().dest(screen_pos));
+
+        // Debug UI: Display player position and FPS in top-left corner
+        let fps = ctx.time.fps();
+        let debug_text = format!(
+            "Pos: ({:.1}, {:.1}) | FPS: {:.0}",
+            self.player.pos.x, self.player.pos.y, fps
+        );
+
+        let text = graphics::Text::new(debug_text);
+        let text_pos = Vector2 { x: 10.0, y: 10.0 };
+        canvas.draw(
+            &text,
+            DrawParam::default().dest(text_pos).color(Color::WHITE),
+        );
 
         canvas.finish(ctx)?;
         Ok(())

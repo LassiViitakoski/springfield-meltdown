@@ -51,6 +51,15 @@ Refer to development-workflow.md for complete protocol and git commit guidelines
 
 ## System Architecture Alignment
 
+**Cross-Cutting Architecture:** This epic implements foundational patterns defined in [System Architecture](architecture/system-architecture.md). Key alignments:
+
+- **Entity Management:** Implements [Phase 1: Naive Rendering](architecture/system-architecture.md#phase-1-naive-rendering-epic-1---current) with Vec<Entity> storage and query_visible() abstraction
+- **Coordinate Systems:** Uses dual [world space / screen space](architecture/system-architecture.md#coordinate-systems) separation with isometric projection
+- **Collision Detection:** Implements [circle-circle collision](architecture/system-architecture.md#circle-circle-collision) (brute-force, O(n*m) acceptable for <50 entities)
+- **Performance Budget:** Targets [16.67ms frame budget](architecture/system-architecture.md#frame-budget-60-fps--1667ms) (60 FPS)
+
+**Technical Decisions:** See [ADR-001](architecture/technical-decisions.md#adr-001-entity-storage---vec-vs-hashmap-vs-spatial-grid) (Entity Storage), [ADR-002](architecture/technical-decisions.md#adr-002-rendering-optimization---3-phase-evolution-strategy) (Rendering Optimization), [ADR-003](architecture/technical-decisions.md#adr-003-coordinate-system---world-space-vs-screen-space-separation) (Coordinate System).
+
 **Framework Architecture:**
 - Leverages ggez's EventHandler trait pattern for game loop (update/draw separation)
 - Uses ggez::graphics for 2D rendering primitives (circles, lines, text)

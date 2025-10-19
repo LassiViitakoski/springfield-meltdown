@@ -39,7 +39,7 @@ SO THAT I can understand the shooting direction
 
 ## References
 
-- [Combat Specification - Mouse Aim System](../combat-spec.md)
+- [Combat Specification - Mouse Aim System](../specs/combat-spec.md)
 
 ---
 

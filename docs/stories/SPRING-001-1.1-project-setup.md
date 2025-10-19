@@ -40,7 +40,7 @@ SO THAT I have a foundation to build the game on
 
 ## References
 
-- [Combat Specification](../combat-spec.md)
+- [Combat Specification](../specs/combat-spec.md)
 - [Game Design Document](../game-design-document.md)
 
 ---

@@ -89,7 +89,7 @@ The absurd tone maintains Simpsons humor while justifying combat mechanics throu
 
 ### Combat System
 
-**Implementation Status:** See [combat-spec.md](combat-spec.md) for detailed prototype specifications.
+**Implementation Status:** See [combat-spec.md](specs/combat-spec.md) for detailed prototype specifications.
 
 **High-Level Design:**
 - **Movement:** 8-directional smooth movement in world space, isometric rendering

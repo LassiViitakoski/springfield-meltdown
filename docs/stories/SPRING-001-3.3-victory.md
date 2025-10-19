@@ -40,7 +40,7 @@ SO THAT I have a clear goal
 
 ## References
 
-- [Combat Specification - Victory & Failure Conditions](../combat-spec.md)
+- [Combat Specification - Victory & Failure Conditions](../specs/combat-spec.md)
 
 ---
 

@@ -40,7 +40,7 @@ SO THAT I can attack enemies
 
 ## References
 
-- [Combat Specification - Weapon #1: Pistol](../combat-spec.md)
+- [Combat Specification - Weapon #1: Pistol](../specs/combat-spec.md)
 
 ---
 

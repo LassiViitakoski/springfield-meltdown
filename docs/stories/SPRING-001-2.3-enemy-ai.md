@@ -40,7 +40,7 @@ SO THAT there is a threat to avoid
 
 ## References
 
-- [Combat Specification - Enemy #1: Radioactive Rat](../combat-spec.md)
+- [Combat Specification - Enemy #1: Radioactive Rat](../specs/combat-spec.md)
 
 ---
 

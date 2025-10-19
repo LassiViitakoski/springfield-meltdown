@@ -40,7 +40,7 @@ SO THAT I know where I am in the game world
 
 ## References
 
-- [Combat Specification - Coordinate System](../combat-spec.md)
+- [Combat Specification - Coordinate System](../specs/combat-spec.md)
 
 ---
 
