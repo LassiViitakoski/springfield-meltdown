@@ -35,6 +35,7 @@ SO THAT I can attack enemies
 - Store projectiles in Vec<Projectile>
 - Update each projectile: pos += velocity * delta_time
 - Cooldown timer tracks last_shot_time
+- **Architecture Note:** Projectiles are entities (pos, movement, rendering). Phase 1 uses Vec storage with naive rendering (all entities processed). Future: query_visible() abstraction per [system-architecture.md](../architecture/system-architecture.md) Phase 2+ when entity count >50
 
 ---
 

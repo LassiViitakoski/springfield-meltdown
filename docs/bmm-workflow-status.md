@@ -8,9 +8,9 @@
 
 ## Current Status
 
-**Current Phase:** 4-Implementation (Story SPRING-001-1.4 Complete - Ready for Git Commit)
-**Current Workflow:** story-approved (Story SPRING-001-1.4) - Complete
-**Overall Progress:** 86%
+**Current Phase:** 4-Implementation (Sprint 1 Complete - Ready for Sprint 2)
+**Current Workflow:** Sprint 1 Retrospective Complete
+**Overall Progress:** 43%
 
 **Project Level:** 2 (Medium project - multiple features/epics)
 **Project Type:** Game
@@ -53,28 +53,33 @@ This section documents your complete planned workflow from start to finish.
 **Epic:** SPRING-001 - Combat Prototype Foundation (21 story points)
 
 **Story Queue:**
-- **BACKLOG:** 6 stories (10 points remaining)
+- **BACKLOG:** 6 stories (12 points remaining)
   - Sprint 2: Stories 2.2-2.4 (5 points) - Combat Mechanics
   - Sprint 3: Stories 3.1-3.3 (5 points) - Health & Victory
-- **TODO:** SPRING-001-2.1 (Mouse Aiming System) - Ready to start
-- **IN PROGRESS:** None (Story 1.4 awaiting git commit)
-- **DONE:** 4 stories (9 points) - SPRING-001-1.1, SPRING-001-1.2, SPRING-001-1.3, SPRING-001-1.4
+- **TODO:** SPRING-001-2.1 (Mouse Aiming System, 3 points) - Ready to start
+- **IN PROGRESS:** None
+- **DONE:** 4 stories (9 points) - Sprint 1 complete
+  - SPRING-001-1.1 (Project Setup, 2 pts)
+  - SPRING-001-1.2 (Player Sprite, 2 pts)
+  - SPRING-001-1.3 (Movement, 3 pts)
+  - SPRING-001-1.4 (Camera & Debug UI, 2 pts)
 
 ---
 
 ## What to Do Next
 
-**Next Action:** Generate Story Context for SPRING-001-1.4
+**Next Action:** Generate Story Context for SPRING-001-2.1
 
 **Command to run:** `*story-context` (with SM agent)
 
 **Agent to load:** `/bmad:bmm:agents:sm`
 
 **Why this next?**
-- Story SPRING-001-1.3 completed (3 points earned)
-- Story SPRING-001-1.4 moved to IN PROGRESS
+- Sprint 1 complete: 4/4 stories done (9/9 points)
+- Story SPRING-001-1.4 committed to git (commit 802a48e)
+- Ready to start Sprint 2: Combat Mechanics
+- Next story: SPRING-001-2.1 (Mouse Aiming System, 3 points, 4-6 hours)
 - Need to generate context XML before implementation
-- Implementation: Camera & Debug UI (2 points, 2-4 hours)
 - Tech spec available: tech-specs/tech-spec-epic-SPRING-001.md
 
 ---
@@ -114,6 +119,7 @@ This section documents your complete planned workflow from start to finish.
 - **2025-10-19:** Completed story-context for Story SPRING-001-1.4 (Camera & Debug UI). Context file: docs/stories/story-context-SPRING-001.SPRING-001-1.4.xml. Next: DEV agent should run dev-story to implement.
 - **2025-10-19:** Completed dev-story for Story SPRING-001-1.4 (Camera & Debug UI). All tasks complete, manual testing validated. Story status: Ready for Review. Implementation: True camera centering (player fixed at screen center), debug UI with position/FPS display, world-relative boundary box rendering. Documented rendering optimization strategy for future architect review. Next: User reviews and runs review-story when satisfied with implementation.
 - **2025-10-19:** Completed review-story for Story SPRING-001-1.4 (Camera & Debug UI). Review outcome: Approve. Action items: 2 (both optional low-priority enhancements). Next: Run story-approved to mark complete and advance story queue.
+- **2025-10-19:** Story SPRING-001-1.4 (Camera & Debug UI) approved and marked complete. Sprint 1 finished: 4/4 stories complete (9/9 points). Committed to git (802a48e): Camera centering implementation, debug UI, documentation reorganization (created architecture/, specs/, tech-specs/ subdirectories). Ready for Sprint 2. Next: Generate story-context for SPRING-001-2.1 (Mouse Aiming System).
 
 ---
 
