@@ -102,6 +102,7 @@ This section documents your complete planned workflow from start to finish.
 - **2025-10-19:** Completed dev-story for Story SPRING-001-1.3 (8-Directional Player Movement). All tasks complete, manual testing validated. Story status: Ready for Review. Implementation: WASD input, screen-space movement (300 px/sec), diagonal normalization, bounds collision. Next: User reviews and runs review-story when ready.
 - **2025-10-19:** Completed review-story for Story SPRING-001-1.3 (8-Directional Player Movement). Review outcome: Approve. Action items: 3 (2 recommended low-priority, 1 optional). Next: Run story-approved to mark complete and advance story queue.
 - **2025-10-19:** Story SPRING-001-1.3 (8-Directional Player Movement) approved and marked complete. Moved from IN PROGRESS → DONE (3 points earned). Story SPRING-001-1.4 (Camera & Debug UI) moved from TODO → IN PROGRESS. Sprint 1 progress: 3/4 stories complete (7/9 points). Next: Generate story-context for SPRING-001-1.4.
+- **2025-10-19:** Committed Story SPRING-001-1.3 to git (46d347b, 486a206). Added development-workflow.md documentation and updated tech spec with development process requirements (17fec9d). Repository now documents standard workflow for manual validation and git commit timing.
 
 ---
 
