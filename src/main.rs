@@ -1,12 +1,13 @@
 use ggez::conf::{WindowMode, WindowSetup};
 use ggez::event::{self, EventHandler};
 use ggez::graphics::{self, Color, DrawParam, Mesh};
+use ggez::input::keyboard::KeyCode;
 use ggez::mint::Vector2;
 use ggez::{Context, ContextBuilder, GameResult};
 
 // Isometric projection constants
-const TILE_WIDTH_HALF: f32 = 32.0;
-const TILE_HEIGHT_HALF: f32 = 16.0;
+const TILE_WIDTH_HALF: f32 = 16.0;
+const TILE_HEIGHT_HALF: f32 = 8.0;
 
 // Player entity
 #[allow(dead_code)] // Some fields used in future stories
@@ -25,7 +26,7 @@ impl Player {
         Player {
             pos: Vector2 { x, y },
             velocity: Vector2 { x: 0.0, y: 0.0 },
-            speed: 150.0,
+            speed: 300.0,
             hp: 100,
             max_hp: 100,
             radius: 16.0,
@@ -58,8 +59,55 @@ impl GameState {
 }
 
 impl EventHandler for GameState {
-    fn update(&mut self, _ctx: &mut Context) -> GameResult {
-        // Game logic will go here in future stories
+    fn update(&mut self, ctx: &mut Context) -> GameResult {
+        // Get delta time for frame-independent movement
+        let delta = ctx.time.delta().as_secs_f32();
+
+        // Build velocity vector from WASD keyboard input
+        // Using screen-space movement for better gameplay feel (equal perceived speed in all directions)
+        let mut velocity = Vector2 { x: 0.0, y: 0.0 };
+
+        if ctx.keyboard.is_key_pressed(KeyCode::W) {
+            velocity.y -= 1.0; // Up on screen
+        }
+        if ctx.keyboard.is_key_pressed(KeyCode::S) {
+            velocity.y += 1.0; // Down on screen
+        }
+        if ctx.keyboard.is_key_pressed(KeyCode::A) {
+            velocity.x -= 1.0; // Left on screen
+        }
+        if ctx.keyboard.is_key_pressed(KeyCode::D) {
+            velocity.x += 1.0; // Right on screen
+        }
+
+        // Normalize diagonal movement to prevent speed boost
+        let length = ((velocity.x * velocity.x + velocity.y * velocity.y) as f32).sqrt();
+        if length > 0.0 {
+            velocity.x /= length;
+            velocity.y /= length;
+        }
+
+        // Apply movement in screen space (velocity is already screen-space)
+        // We move the player in screen coordinates, treating world pos as screen pos
+        // The isometric transform is purely visual (rendering only)
+        self.player.velocity = velocity;
+        self.player.pos.x += velocity.x * self.player.speed * delta;
+        self.player.pos.y += velocity.y * self.player.speed * delta;
+
+        // Screen bounds collision: clamp player position to stay within green debug box
+        // Green box: 600x400 at screen position (100, 100) to (700, 500)
+        // Player pos is offset from screen center (400, 300), so:
+        // Min pos: (100 - 400, 100 - 300) = (-300, -200)
+        // Max pos: (700 - 400, 500 - 300) = (300, 200)
+        // Account for player radius to keep entire circle inside bounds
+        let min_x = -300.0 + self.player.radius;
+        let max_x = 300.0 - self.player.radius;
+        let min_y = -200.0 + self.player.radius;
+        let max_y = 200.0 - self.player.radius;
+
+        self.player.pos.x = self.player.pos.x.clamp(min_x, max_x);
+        self.player.pos.y = self.player.pos.y.clamp(min_y, max_y);
+
         Ok(())
     }
 
@@ -67,9 +115,23 @@ impl EventHandler for GameState {
         // Clear screen with black background
         let mut canvas = graphics::Canvas::from_frame(ctx, Color::BLACK);
 
-        // Transform player world position to screen coordinates
-        let camera_offset = Vector2 { x: 400.0, y: 300.0 };
-        let screen_pos = world_to_screen(self.player.pos, camera_offset);
+        // Draw debug bounds box (600x400 centered at screen)
+        // Screen is 800x600, so box starts at (100, 100)
+        let bounds_rect = graphics::Rect::new(100.0, 100.0, 600.0, 400.0);
+        let bounds_mesh = Mesh::new_rectangle(
+            ctx,
+            graphics::DrawMode::stroke(2.0),
+            bounds_rect,
+            Color::from_rgb(0, 255, 0), // Green debug box
+        )?;
+        canvas.draw(&bounds_mesh, DrawParam::default());
+
+        // Player position is already in screen space (no isometric transform needed)
+        // Player starts at center of screen
+        let screen_pos = Vector2 {
+            x: 400.0 + self.player.pos.x,
+            y: 300.0 + self.player.pos.y,
+        };
 
         // Create yellow circle mesh for player sprite
         let player_color = Color::from_rgb(255, 215, 0); // #FFD700 yellow

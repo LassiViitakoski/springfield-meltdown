@@ -8,9 +8,9 @@
 
 ## Current Status
 
-**Current Phase:** 4-Implementation (Story SPRING-001-1.2 Approved)
-**Current Workflow:** story-approved (Story SPRING-001-1.2) - Complete
-**Overall Progress:** 64%
+**Current Phase:** 4-Implementation (Story SPRING-001-1.3 Complete)
+**Current Workflow:** story-approved (Story SPRING-001-1.3) - Complete
+**Overall Progress:** 75%
 
 **Project Level:** 2 (Medium project - multiple features/epics)
 **Project Type:** Game
@@ -53,28 +53,28 @@ This section documents your complete planned workflow from start to finish.
 **Epic:** SPRING-001 - Combat Prototype Foundation (21 story points)
 
 **Story Queue:**
-- **BACKLOG:** 8 stories (15 points remaining)
-  - Sprint 1: Story 1.4 (2 points) - Debug UI
+- **BACKLOG:** 7 stories (12 points remaining)
   - Sprint 2: Stories 2.1-2.4 (8 points) - Combat Mechanics
-  - Sprint 3: Stories 3.1-3.3 (5 points) - Health & Victory
-- **TODO:** SPRING-001-1.4 (Camera & Debug UI)
-- **IN PROGRESS:** SPRING-001-1.3 (8-Directional Player Movement) - Status: Draft
-- **DONE:** 2 stories (4 points) - SPRING-001-1.1, SPRING-001-1.2
+  - Sprint 3: Stories 3.1-3.3 (5 points) - Health & Victory (minus Story 3.3, 1 point)
+- **TODO:** None (ready to pull from backlog)
+- **IN PROGRESS:** SPRING-001-1.4 (Camera & Debug UI) - Status: Ready to Start
+- **DONE:** 3 stories (7 points) - SPRING-001-1.1, SPRING-001-1.2, SPRING-001-1.3
 
 ---
 
 ## What to Do Next
 
-**Next Action:** Generate story context for SPRING-001-1.3
+**Next Action:** Generate Story Context for SPRING-001-1.4
 
 **Command to run:** `*story-context` (with SM agent)
 
 **Agent to load:** `/bmad:bmm:agents:sm`
 
 **Why this next?**
-- Story SPRING-001-1.3 moved to IN PROGRESS after completing 1.2
-- Context needed before development can begin
-- Implementation: 8-Directional Player Movement (2 points, 2-3 hours)
+- Story SPRING-001-1.3 completed (3 points earned)
+- Story SPRING-001-1.4 moved to IN PROGRESS
+- Need to generate context XML before implementation
+- Implementation: Camera & Debug UI (2 points, 2-4 hours)
 - Tech spec available: tech-spec-epic-SPRING-001.md
 
 ---
@@ -98,6 +98,10 @@ This section documents your complete planned workflow from start to finish.
 - **2025-10-18:** Completed dev-story for Story SPRING-001-1.2 (Player Entity & Sprite Rendering). All tasks complete, tests passing. Story status: Ready for Review. Next: User reviews and runs story-approved when satisfied with implementation.
 - **2025-10-18:** Completed review-story for Story SPRING-001-1.2 (Player Entity & Sprite Rendering). Review outcome: Approve. No action items. Story status changed to Review Passed. Next: Run story-approved to mark complete and advance story queue.
 - **2025-10-18:** Story SPRING-001-1.2 (Player Entity & Sprite Rendering) approved and marked complete. Moved from IN PROGRESS → DONE (2 points earned). Story SPRING-001-1.3 (8-Directional Player Movement) moved from TODO → IN PROGRESS. Story SPRING-001-1.4 (Camera & Debug UI) moved from BACKLOG → TODO. Next: Generate story-context for SPRING-001-1.3.
+- **2025-10-18:** Completed story-context for Story SPRING-001-1.3 (8-Directional Player Movement). Context file: docs/stories/story-context-SPRING-001.SPRING-001-1.3.xml. Next: DEV agent should run dev-story to implement.
+- **2025-10-19:** Completed dev-story for Story SPRING-001-1.3 (8-Directional Player Movement). All tasks complete, manual testing validated. Story status: Ready for Review. Implementation: WASD input, screen-space movement (300 px/sec), diagonal normalization, bounds collision. Next: User reviews and runs review-story when ready.
+- **2025-10-19:** Completed review-story for Story SPRING-001-1.3 (8-Directional Player Movement). Review outcome: Approve. Action items: 3 (2 recommended low-priority, 1 optional). Next: Run story-approved to mark complete and advance story queue.
+- **2025-10-19:** Story SPRING-001-1.3 (8-Directional Player Movement) approved and marked complete. Moved from IN PROGRESS → DONE (3 points earned). Story SPRING-001-1.4 (Camera & Debug UI) moved from TODO → IN PROGRESS. Sprint 1 progress: 3/4 stories complete (7/9 points). Next: Generate story-context for SPRING-001-1.4.
 
 ---
 

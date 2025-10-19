@@ -1,0 +1,130 @@
+<story-context id="bmad/bmm/workflows/4-implementation/story-context/template" v="1.0">
+  <metadata>
+    <epicId>SPRING-001</epicId>
+    <storyId>SPRING-001-1.3</storyId>
+    <title>8-Directional Player Movement</title>
+    <status>draft</status>
+    <generatedAt>2025-10-18</generatedAt>
+    <generator>BMAD Story Context Workflow</generator>
+    <sourceStoryPath>docs/stories/SPRING-001-1.3-movement.md</sourceStoryPath>
+  </metadata>
+
+  <story>
+    <asA>a player</asA>
+    <iWant>to move my character with WASD keys</iWant>
+    <soThat>I can navigate the game world</soThat>
+    <tasks>
+      - Add velocity field to Player struct
+      - Implement keyboard input handling (WASD)
+      - Calculate movement vector from input
+      - Normalize diagonal movement vectors
+      - Apply velocity with delta_time multiplier
+      - Implement screen bounds collision
+      - Test all 8 movement directions
+      - Verify movement speed consistency
+    </tasks>
+  </story>
+
+  <acceptanceCriteria>
+    <criterion id="AC-1">WASD keys move player in 8 directions (up, down, left, right, diagonals)</criterion>
+    <criterion id="AC-2">Movement speed = 150 pixels/second</criterion>
+    <criterion id="AC-3">Diagonal movement normalized (same speed as cardinal directions)</criterion>
+    <criterion id="AC-4">Movement is smooth and responsive</criterion>
+    <criterion id="AC-5">Player cannot leave screen bounds (collision with edges)</criterion>
+  </acceptanceCriteria>
+
+  <artifacts>
+    <docs>
+      <doc>
+        <path>docs/tech-spec-epic-SPRING-001.md</path>
+        <title>Technical Specification: Combat Prototype Foundation</title>
+        <section>Acceptance Criteria AC-1.3</section>
+        <snippet>WASD keys move player in 8 directions (cardinal + diagonal). Movement speed measures 150 pixels/second. Diagonal movement normalized (same speed, not 1.4x faster). Movement feels smooth and responsive. Player collision with screen bounds prevents leaving 800x600 window area.</snippet>
+      </doc>
+      <doc>
+        <path>docs/combat-spec.md</path>
+        <title>Combat System Specification</title>
+        <section>Player Movement - Input Scheme & Implementation</section>
+        <snippet>WASD or Arrow Keys for 8-directional movement. No acceleration/deceleration (instant response for prototype). Diagonal movement normalized to prevent speed boost. Implementation: collect input to velocity vector, normalize if length > 0, apply movement: pos += velocity * speed * delta_time. Base Speed: 150 pixels/second, Collision Radius: 16 pixels, Bounds Checking: prevent leaving play area.</snippet>
+      </doc>
+      <doc>
+        <path>docs/combat-spec.md</path>
+        <title>Combat System Specification</title>
+        <section>Player Movement - Pseudo-code</section>
+        <snippet>let mut velocity = Vec2::new(0.0, 0.0); if key_pressed(W) { velocity.y -= 1.0; } if key_pressed(S) { velocity.y += 1.0; } if key_pressed(A) { velocity.x -= 1.0; } if key_pressed(D) { velocity.x += 1.0; } if velocity.length() > 0.0 { velocity = velocity.normalize(); } player.position += velocity * PLAYER_SPEED * delta_time;</snippet>
+      </doc>
+    </docs>
+    <code>
+      <artifact>
+        <path>src/main.rs</path>
+        <kind>main entry point</kind>
+        <symbol>Player struct, GameState, EventHandler impl</symbol>
+        <lines>12-35, 47-64</lines>
+        <reason>Existing Player struct (already has pos and velocity fields), GameState with player field, EventHandler update() method needs keyboard input handling for WASD movement</reason>
+      </artifact>
+      <artifact>
+        <path>src/main.rs</path>
+        <kind>coordinate transform</kind>
+        <symbol>world_to_screen()</symbol>
+        <lines>38-45</lines>
+        <reason>Existing isometric projection function - needed for rendering after player moves in world space</reason>
+      </artifact>
+    </code>
+    <dependencies>
+      <rust>
+        <package name="ggez" version="0.9" purpose="Game framework: keyboard input API (ctx.keyboard), delta time (ctx.time.delta()), Vec2/Vector2 math utilities (length, normalize), EventHandler trait" />
+      </rust>
+    </dependencies>
+  </artifacts>
+
+  <constraints>
+    - Use ggez keyboard input API: ctx.keyboard.is_key_pressed(KeyCode::W/A/S/D)
+    - Normalize velocity vector when length() > 0.0 to prevent diagonal speed boost (diagonal would be sqrt(2) ≈ 1.414x faster without normalization)
+    - Apply movement formula: player.pos += velocity * player.speed * delta_time (where delta_time = ctx.time.delta().as_secs_f32())
+    - Screen bounds: clamp player position to world coordinates that keep sprite within 800x600 window (consider camera offset transform)
+    - Movement speed constant already defined in Player struct: speed = 150.0 pixels/second
+    - World space logic: all movement calculations in world coordinates, then transform to screen via world_to_screen() for rendering only
+    - Player struct velocity field already exists (initialized to 0,0) - update it in EventHandler::update()
+    - Rust ownership: mutable borrow of self in update() allows modifying player.pos directly
+    - Performance: No heap allocations in movement hot path, Vec2 operations are stack-based
+  </constraints>
+
+  <interfaces>
+    <interface>
+      <name>EventHandler::update</name>
+      <kind>Trait method (modification)</kind>
+      <signature>fn update(&amp;mut self, ctx: &amp;mut Context) -> GameResult</signature>
+      <path>src/main.rs (exists at line 61, needs keyboard input + movement logic)</path>
+    </interface>
+    <interface>
+      <name>ggez::input::keyboard</name>
+      <kind>ggez API</kind>
+      <signature>ctx.keyboard.is_key_pressed(KeyCode) -> bool</signature>
+      <path>ggez crate (external dependency)</path>
+    </interface>
+    <interface>
+      <name>ggez::mint::Vector2</name>
+      <kind>Math type</kind>
+      <signature>Vector2&lt;f32&gt; { x: f32, y: f32 } with methods: length(), normalize()</signature>
+      <path>ggez crate (external dependency, already imported at line 4)</path>
+    </interface>
+    <interface>
+      <name>Player.velocity</name>
+      <kind>Struct field (existing)</kind>
+      <signature>velocity: Vector2&lt;f32&gt;</signature>
+      <path>src/main.rs:15 (already exists, initialized to 0,0 in Player::new())</path>
+    </interface>
+  </interfaces>
+
+  <tests>
+    <standards>Manual playtesting only for Phase 1. No automated tests required. Validate acceptance criteria through gameplay. Measure movement speed by logging position delta over time. Test all 8 directions (N, NE, E, SE, S, SW, W, NW) for consistency. Verify diagonal movement is not faster than cardinal directions (normalized correctly). Test bounds collision by moving to screen edges.</standards>
+    <locations>N/A - No automated tests in prototype phase. Future: tests/ directory for unit tests of movement logic, normalize behavior, bounds collision.</locations>
+    <ideas>
+      <test-idea ac-ref="AC-1">Launch game, press each of W, A, S, D individually to verify 4 cardinal directions. Press W+A, W+D, S+A, S+D to verify 4 diagonal directions. Player should move in all 8 directions.</test-idea>
+      <test-idea ac-ref="AC-2">Add debug println!("Speed: {}", velocity.length() * player.speed) in update(). Verify output is ~150.0 px/sec when moving. Alternative: log position over 1 second, calculate delta distance.</test-idea>
+      <test-idea ac-ref="AC-3">Move diagonally (W+D) and measure speed. Move cardinally (W only) and measure speed. Both should be ~150 px/sec (not 212 px/sec for diagonal). Verify velocity.normalize() is called when length() > 0.</test-idea>
+      <test-idea ac-ref="AC-4">Subjective: does movement feel responsive? No input lag? Smooth motion? Test by rapidly changing directions (W -> A -> S -> D).</test-idea>
+      <test-idea ac-ref="AC-5">Hold W (move up) until hitting top screen edge - player should stop moving. Repeat for all 4 edges. Player sprite should never go off-screen.</test-idea>
+    </ideas>
+  </tests>
+</story-context>
