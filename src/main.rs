@@ -45,8 +45,25 @@ fn world_to_screen(world_pos: Vector2<f32>, camera_offset: Vector2<f32>) -> Vect
     }
 }
 
+// Convert screen coordinates to world coordinates (inverse isometric projection)
+fn screen_to_world(screen_pos: Vector2<f32>, camera_offset: Vector2<f32>) -> Vector2<f32> {
+    // Remove camera offset to get isometric space coordinates
+    let adjusted_x = screen_pos.x - camera_offset.x;
+    let adjusted_y = screen_pos.y - camera_offset.y;
+
+    // Apply inverse isometric transformation
+    let world_x = (adjusted_x / TILE_WIDTH_HALF + adjusted_y / TILE_HEIGHT_HALF) / 2.0;
+    let world_y = (adjusted_y / TILE_HEIGHT_HALF - adjusted_x / TILE_WIDTH_HALF) / 2.0;
+
+    Vector2 {
+        x: world_x,
+        y: world_y,
+    }
+}
+
 struct GameState {
     player: Player,
+    mouse_world_pos: Vector2<f32>, // Mouse position in world coordinates
 }
 
 impl GameState {
@@ -54,7 +71,10 @@ impl GameState {
         // Initialize player at world origin - camera will position it at screen center
         let player = Player::new(0.0, 0.0);
 
-        Ok(GameState { player })
+        Ok(GameState {
+            player,
+            mouse_world_pos: Vector2 { x: 0.0, y: 0.0 },
+        })
     }
 }
 
@@ -93,6 +113,24 @@ impl EventHandler for GameState {
         self.player.velocity = velocity;
         self.player.pos.x += velocity.x * self.player.speed * delta;
         self.player.pos.y += velocity.y * self.player.speed * delta;
+
+        // Track mouse position and convert to world coordinates
+        // Get mouse screen position from ggez
+        let mouse_screen_pos = ctx.mouse.position();
+        let mouse_vec = Vector2 {
+            x: mouse_screen_pos.x,
+            y: mouse_screen_pos.y,
+        };
+
+        // Calculate camera offset (same as in draw())
+        let screen_center = Vector2 { x: 400.0, y: 300.0 };
+        let camera_offset = Vector2 {
+            x: screen_center.x - self.player.pos.x,
+            y: screen_center.y - self.player.pos.y,
+        };
+
+        // Convert mouse screen position to world coordinates
+        self.mouse_world_pos = screen_to_world(mouse_vec, camera_offset);
 
         // Screen bounds collision: clamp player position to stay within green debug box
         // Green box: 600x400 at screen position (100, 100) to (700, 500)
@@ -162,6 +200,19 @@ impl EventHandler for GameState {
 
         // Draw player at screen position
         canvas.draw(&circle, DrawParam::default().dest(screen_pos));
+
+        // Draw aim line from player to mouse cursor (red, 2px thick)
+        // Player is always at screen center, mouse world pos needs to be transformed to screen space
+        let mouse_screen_pos = world_to_screen(self.mouse_world_pos, camera_offset);
+
+        // Create line from player center to mouse cursor
+        let aim_line = Mesh::new_line(
+            ctx,
+            &[screen_center, mouse_screen_pos],
+            2.0,                           // Line thickness: 2px
+            Color::from_rgb(255, 0, 0),    // Red color (#FF0000)
+        )?;
+        canvas.draw(&aim_line, DrawParam::default());
 
         // Debug UI: Display player position and FPS in top-left corner
         let fps = ctx.time.fps();

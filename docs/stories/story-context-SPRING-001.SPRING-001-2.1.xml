@@ -1,0 +1,161 @@
+<story-context id="bmad/bmm/workflows/4-implementation/story-context/template" v="1.0">
+  <metadata>
+    <epicId>SPRING-001</epicId>
+    <storyId>SPRING-001-2.1</storyId>
+    <title>Mouse Aiming Visualization</title>
+    <status>draft</status>
+    <generatedAt>2025-10-25</generatedAt>
+    <generator>BMAD Story Context Workflow</generator>
+    <sourceStoryPath>docs/stories/SPRING-001-2.1-mouse-aiming.md</sourceStoryPath>
+  </metadata>
+
+  <story>
+    <asA>a player</asA>
+    <iWant>to see where I'm aiming</iWant>
+    <soThat>I can understand the shooting direction</soThat>
+    <tasks>
+      - Implement screen_to_world() coordinate transform
+      - Track mouse position in update()
+      - Convert mouse screen coords to world coords
+      - Calculate aim direction vector
+      - Draw line from player to cursor
+      - Verify line updates smoothly
+    </tasks>
+  </story>
+
+  <acceptanceCriteria>
+    <criterion id="AC-2.1.1">Mouse position tracked in world coordinates (screen_to_world() implemented)</criterion>
+    <criterion id="AC-2.1.2">Red line drawn from player center to mouse cursor position</criterion>
+    <criterion id="AC-2.1.3">Line thickness: 2 pixels, color: red (#FF0000)</criterion>
+    <criterion id="AC-2.1.4">Line updates every frame as mouse moves</criterion>
+    <criterion id="AC-2.1.5">Aim direction visually accurate (line points at cursor)</criterion>
+  </acceptanceCriteria>
+
+  <artifacts>
+    <docs>
+      <doc>
+        <path>docs/specs/combat-spec.md</path>
+        <title>Combat System Specification - Mouse Aim System</title>
+        <section>Combat Controls - Mouse Aim System</section>
+        <snippet>Mouse aim decouples movement from shooting direction. Implementation: (1) Get mouse screen position from ggez, (2) Convert screen to world coords (inverse isometric transform), (3) Calculate aim_direction = (mouse_world_pos - player_pos).normalize()</snippet>
+      </doc>
+      <doc>
+        <path>docs/specs/combat-spec.md</path>
+        <title>Combat System Specification - Coordinate Transform Helpers</title>
+        <section>Technical Notes - Coordinate Transform Helpers</section>
+        <snippet>screen_to_world inverse isometric: world_x = (screen_x / TILE_WIDTH_HALF + screen_y / TILE_HEIGHT_HALF) / 2.0; world_y = (screen_y / TILE_HEIGHT_HALF - screen_x / TILE_WIDTH_HALF) / 2.0</snippet>
+      </doc>
+      <doc>
+        <path>docs/tech-specs/tech-spec-epic-SPRING-001.md</path>
+        <title>Technical Specification: Combat Prototype Foundation</title>
+        <section>Data Models and Contracts - Coordinate Systems</section>
+        <snippet>Dual coordinate system: 2D world space (logic) and isometric screen space (rendering). screen_to_world() required for mouse input conversion. Transformation formula provided with TILE_WIDTH_HALF and TILE_HEIGHT_HALF constants.</snippet>
+      </doc>
+      <doc>
+        <path>docs/architecture/system-architecture.md</path>
+        <title>System Architecture - Coordinate Systems</title>
+        <section>Coordinate Systems - Inverse Projection (Mouse Input)</section>
+        <snippet>screen_to_world subtracts camera_offset, applies inverse isometric math. world_x = (adjusted.x / TILE_WIDTH_HALF + adjusted.y / TILE_HEIGHT_HALF) / 2.0</snippet>
+      </doc>
+      <doc>
+        <path>docs/game-design-document.md</path>
+        <title>Game Design Document - Visual Style</title>
+        <section>Theme & Setting - Visual Style</section>
+        <snippet>2.5D isometric perspective with sprite-based graphics. World uses 2D coordinates transformed to screen isometric projection with depth sorting.</snippet>
+      </doc>
+    </docs>
+
+    <code>
+      <artifact>
+        <path>src/main.rs</path>
+        <kind>main game state</kind>
+        <symbol>world_to_screen</symbol>
+        <lines>38-46</lines>
+        <reason>Existing coordinate transform function - need to implement inverse (screen_to_world) following same pattern</reason>
+      </artifact>
+      <artifact>
+        <path>src/main.rs</path>
+        <kind>game state</kind>
+        <symbol>GameState::update</symbol>
+        <lines>62-112</lines>
+        <reason>Update loop where mouse tracking will be added using ctx.mouse API</reason>
+      </artifact>
+      <artifact>
+        <path>src/main.rs</path>
+        <kind>game state</kind>
+        <symbol>GameState::draw</symbol>
+        <lines>114-182</lines>
+        <reason>Draw loop where aim line rendering will be added using Mesh::new_line</reason>
+      </artifact>
+      <artifact>
+        <path>src/main.rs</path>
+        <kind>constants</kind>
+        <symbol>TILE_WIDTH_HALF, TILE_HEIGHT_HALF</symbol>
+        <lines>9-10</lines>
+        <reason>Isometric projection constants (currently 16.0, 8.0) needed for screen_to_world calculation</reason>
+      </artifact>
+      <artifact>
+        <path>src/main.rs</path>
+        <kind>struct</kind>
+        <symbol>Player</symbol>
+        <lines>12-36</lines>
+        <reason>Player position (world coordinates) needed as line start point</reason>
+      </artifact>
+    </code>
+
+    <dependencies>
+      <rust>
+        <package name="ggez" version="0.9" usage="Context::mouse API for position, graphics::Mesh::new_line for rendering" />
+      </rust>
+    </dependencies>
+  </artifacts>
+
+  <constraints>
+    <constraint>Use existing isometric coordinate system (TILE_WIDTH_HALF=16.0, TILE_HEIGHT_HALF=8.0)</constraint>
+    <constraint>Camera offset must be factored into screen_to_world calculation (see world_to_screen pattern)</constraint>
+    <constraint>Line should be drawn in screen space after transforming world coordinates</constraint>
+    <constraint>No projectile spawning yet - Story 2.1 is visualization only</constraint>
+    <constraint>Follow existing code patterns: update() for logic, draw() for rendering</constraint>
+    <constraint>Line color must be red (#FF0000), thickness 2px per acceptance criteria</constraint>
+  </constraints>
+
+  <interfaces>
+    <interface>
+      <name>screen_to_world</name>
+      <kind>function</kind>
+      <signature>fn screen_to_world(screen_pos: Vector2&lt;f32&gt;, camera_offset: Vector2&lt;f32&gt;) -> Vector2&lt;f32&gt;</signature>
+      <path>src/main.rs</path>
+      <description>Inverse isometric projection - converts mouse screen position to world coordinates for aiming</description>
+    </interface>
+    <interface>
+      <name>ctx.mouse.position()</name>
+      <kind>ggez API</kind>
+      <signature>pub fn position(&amp;self) -> Point2&lt;f32&gt;</signature>
+      <description>ggez mouse API - returns current mouse position in screen coordinates</description>
+    </interface>
+    <interface>
+      <name>Mesh::new_line</name>
+      <kind>ggez graphics API</kind>
+      <signature>pub fn new_line(ctx: &amp;mut Context, points: &amp;[Vector2&lt;f32&gt;], width: f32, color: Color) -> GameResult&lt;Mesh&gt;</signature>
+      <description>ggez line rendering - draws line between points with specified width and color</description>
+    </interface>
+  </interfaces>
+
+  <tests>
+    <standards>
+      Manual playtesting per tech spec (tech-specs/tech-spec-epic-SPRING-001.md): "Manual Test Scenarios - Sprint 2 Testing". No automated tests in Phase 1 prototype. Acceptance criteria validated through play.
+    </standards>
+
+    <locations>
+      No test files in Phase 1. Future tests would go in: tests/ directory or src/main.rs #[cfg(test)] module
+    </locations>
+
+    <ideas>
+      <idea criterionId="AC-2.1.1">Manual test: Move mouse around screen, log world coordinates, verify inverse transform correctness by comparing with known world positions</idea>
+      <idea criterionId="AC-2.1.2">Manual test: Run game, observe red line drawn from yellow player circle center to mouse cursor</idea>
+      <idea criterionId="AC-2.1.3">Manual test: Visually inspect line is red color and approximately 2px thick</idea>
+      <idea criterionId="AC-2.1.4">Manual test: Move mouse continuously, verify line updates smoothly every frame without lag or stuttering</idea>
+      <idea criterionId="AC-2.1.5">Manual test: Position mouse at known screen locations, verify line points accurately at cursor (not offset or rotated incorrectly)</idea>
+    </ideas>
+  </tests>
+</story-context>

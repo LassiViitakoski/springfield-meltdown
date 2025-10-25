@@ -8,9 +8,9 @@
 
 ## Current Status
 
-**Current Phase:** 4-Implementation (Sprint 1 Complete - Ready for Sprint 2)
-**Current Workflow:** Sprint 1 Retrospective Complete
-**Overall Progress:** 43%
+**Current Phase:** 4-Implementation (Sprint 2 - Story Complete)
+**Current Workflow:** Story SPRING-001-2.1 approved and ready for git commit
+**Overall Progress:** 52%
 
 **Project Level:** 2 (Medium project - multiple features/epics)
 **Project Type:** Game
@@ -53,34 +53,33 @@ This section documents your complete planned workflow from start to finish.
 **Epic:** SPRING-001 - Combat Prototype Foundation (21 story points)
 
 **Story Queue:**
-- **BACKLOG:** 6 stories (12 points remaining)
-  - Sprint 2: Stories 2.2-2.4 (5 points) - Combat Mechanics
+- **BACKLOG:** 5 stories (10 points remaining)
+  - Sprint 2: Stories 2.3-2.4 (3 points) - Combat Mechanics
   - Sprint 3: Stories 3.1-3.3 (5 points) - Health & Victory
-- **TODO:** SPRING-001-2.1 (Mouse Aiming System, 3 points) - Ready to start
+- **TODO:** SPRING-001-2.2 (Projectile Spawning, 2 points) - Ready to start
 - **IN PROGRESS:** None
-- **DONE:** 4 stories (9 points) - Sprint 1 complete
+- **DONE:** 5 stories (11 points) - Sprint 1 complete + Story 2.1
   - SPRING-001-1.1 (Project Setup, 2 pts)
   - SPRING-001-1.2 (Player Sprite, 2 pts)
   - SPRING-001-1.3 (Movement, 3 pts)
   - SPRING-001-1.4 (Camera & Debug UI, 2 pts)
+  - SPRING-001-2.1 (Mouse Aiming Visualization, 2 pts)
 
 ---
 
 ## What to Do Next
 
-**Next Action:** Generate Story Context for SPRING-001-2.1
+**Next Action:** Commit Story SPRING-001-2.1 code to git
 
-**Command to run:** `*story-context` (with SM agent)
+**Command to run:** Git commit (user action)
 
-**Agent to load:** `/bmad:bmm:agents:sm`
+**Agent to load:** User (manual git commit)
 
 **Why this next?**
-- Sprint 1 complete: 4/4 stories done (9/9 points)
-- Story SPRING-001-1.4 committed to git (commit 802a48e)
-- Ready to start Sprint 2: Combat Mechanics
-- Next story: SPRING-001-2.1 (Mouse Aiming System, 3 points, 4-6 hours)
-- Need to generate context XML before implementation
-- Tech spec available: tech-specs/tech-spec-epic-SPRING-001.md
+- Story SPRING-001-2.1 marked complete and moved to DONE
+- Progress: 5/11 stories complete (11/21 points = 52%)
+- Ready to commit implementation to version control
+- After commit: Generate story-context for SPRING-001-2.2 (Projectile Spawning)
 
 ---
 
@@ -120,6 +119,10 @@ This section documents your complete planned workflow from start to finish.
 - **2025-10-19:** Completed dev-story for Story SPRING-001-1.4 (Camera & Debug UI). All tasks complete, manual testing validated. Story status: Ready for Review. Implementation: True camera centering (player fixed at screen center), debug UI with position/FPS display, world-relative boundary box rendering. Documented rendering optimization strategy for future architect review. Next: User reviews and runs review-story when satisfied with implementation.
 - **2025-10-19:** Completed review-story for Story SPRING-001-1.4 (Camera & Debug UI). Review outcome: Approve. Action items: 2 (both optional low-priority enhancements). Next: Run story-approved to mark complete and advance story queue.
 - **2025-10-19:** Story SPRING-001-1.4 (Camera & Debug UI) approved and marked complete. Sprint 1 finished: 4/4 stories complete (9/9 points). Committed to git (802a48e): Camera centering implementation, debug UI, documentation reorganization (created architecture/, specs/, tech-specs/ subdirectories). Ready for Sprint 2. Next: Generate story-context for SPRING-001-2.1 (Mouse Aiming System).
+- **2025-10-25:** Completed story-context for Story SPRING-001-2.1 (Mouse Aiming Visualization). Context file: docs/stories/story-context-SPRING-001.SPRING-001-2.1.xml. Next: DEV agent should run dev-story to implement.
+- **2025-10-25:** Completed dev-story for Story SPRING-001-2.1 (Mouse Aiming Visualization). All tasks complete, manual testing validated. Story status: Ready for Review. Implementation: screen_to_world() inverse transform, mouse tracking in update(), red aim line rendering (2px, #FF0000). Next: User reviews and runs review-story when satisfied with implementation.
+- **2025-10-25:** Completed review-story for Story SPRING-001-2.1 (Mouse Aiming Visualization). Review outcome: Approve. Action items: 2 (both optional low-priority enhancements for Phase 2). Next: Run story-approved to mark complete and advance story queue.
+- **2025-10-25:** Story SPRING-001-2.1 (Mouse Aiming Visualization) marked complete and moved to DONE. Progress: 5/11 stories (11/21 points = 52%). Story SPRING-001-2.2 (Projectile Spawning) moved to TODO. Next: Commit story to git, then generate story-context for SPRING-001-2.2.
 
 ---
 
